@@ -1345,14 +1345,16 @@ const PageFlow: React.FC<{ current: SubPage; go: (p: Page) => void }> = ({ curre
 /**
  * 발표자료 이미지가 놓인 경로.
  *
- * portfolio-decks.zip 을 프로젝트의 public 폴더에 풀면
- *   public/decks/zipmap/01.jpg … 25.jpg
- *   public/decks/pleegie/01.jpg … 28.jpg
- * 구조가 되고, 브라우저에서는 /decks/... 로 접근됩니다.
+ * 슬라이드 이미지는 public 폴더 아래 이렇게 둡니다.
+ *   public/decks/zipmap/01.jpg   … 25.jpg
+ *   public/decks/pleegie/01.jpg  … 28.jpg
+ *   public/decks/basecamp/01.jpg … 24.jpg
  *
- * 하위 경로(예: example.com/portfolio/)에 배포한다면 "/portfolio/decks" 처럼 바꾸세요.
+ * vite.config.ts 의 base 가 './' 라서 BASE_URL 도 './' 가 됩니다.
+ * 덕분에 루트 배포(Vercel)든 하위 경로 배포(GitHub Pages)든 같은 코드로 동작하며,
+ * 배포처를 옮겨도 이 값을 고칠 필요가 없습니다.
  */
-const DECK_BASE = "/decks";
+const DECK_BASE = `${import.meta.env.BASE_URL}decks`;
 
 /** 슬라이드 한 장의 실제 주소 */
 const slideSrc = (base: string, n: number): string =>

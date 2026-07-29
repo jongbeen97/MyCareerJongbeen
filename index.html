@@ -13,11 +13,23 @@
     <meta name="author" content="이종빈" />
 
     <!--
-      배포 후 할 일 — 아래 og:url 과 og:image 를 실제 절대 주소로 바꾸세요.
-        예) https://jongbeen97.github.io  /  https://jongbeen97.github.io/og.png
-      카카오톡·링크드인·슬랙 같은 크롤러는 상대 경로를 제대로 못 읽는 경우가 있어
-      링크 미리보기를 확실히 띄우려면 절대 주소여야 합니다.
-      이미지는 public/og.png (1200x630) 이며 tools/make-og.ps1 로 다시 만들 수 있습니다.
+      ┌─ Vercel 첫 배포 후 딱 한 번 할 일 ────────────────────────────────┐
+      │ 아래 og:url 과 og:image 의 값을 발급받은 실제 주소로 바꾸세요.     │
+      │   og:url   → https://<프로젝트명>.vercel.app                      │
+      │   og:image → https://<프로젝트명>.vercel.app/og.png               │
+      │                                                                   │
+      │ 다른 경로는 전부 상대 경로라 손댈 필요가 없지만, 이 두 줄만은      │
+      │ 절대 주소여야 합니다. 카카오톡·링크드인·슬랙 크롤러는 페이지를     │
+      │ 서버에서 긁어가기 때문에 상대 경로를 해석하지 못해, 지금 상태로는  │
+      │ 링크 미리보기가 빈 카드로 뜹니다.                                 │
+      │                                                                   │
+      │ 주소를 바꾼 뒤 카카오톡 미리보기는 캐시가 남아 있을 수 있습니다.   │
+      │ https://developers.kakao.com/tool/clear/og 에서 초기화하세요.      │
+      │                                                                   │
+      │ 이미지 원본: public/og.png (1200x630)                             │
+      │ 다시 만들기: powershell tools/make-og.ps1 public/og.png            │
+      │              문구는 tools/og-text.json 에서 수정                   │
+      └───────────────────────────────────────────────────────────────────┘
     -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="이종빈 · 백엔드 개발자 포트폴리오" />
