@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════════════════════════════════
-   이종빈 백엔드 포트폴리오 — TypeScript + React 단일 파일
+   이종빈 풀스택 포트폴리오 — TypeScript + React 단일 파일
    ----------------------------------------------------------------------
    구조
      1. TYPES         화면이 요구하는 데이터 모양을 타입으로 고정
@@ -362,6 +362,10 @@ const STYLES = `
   letter-spacing:-.05em;margin:26px 0 0}
 .jb h1 .sub{display:block;font-size:clamp(16px,2vw,21px);font-weight:500;letter-spacing:-.01em;
   color:var(--accent-lt);margin-top:20px;font-family:var(--mono)}
+/* 홈 제목은 문장이라 기본 h1 보다 작게 잡고 줄간격을 넓힙니다 */
+.jb .hero h1{font-size:clamp(34px,5.2vw,58px);line-height:1.14;letter-spacing:-.04em;margin-top:22px}
+.jb .hero h1 .pre{display:block;font-size:clamp(17px,2.2vw,25px);font-weight:600;line-height:1.45;
+  letter-spacing:-.02em;color:var(--accent-lt);margin-bottom:14px}
 .jb .hero-lead{font-size:18.5px;line-height:1.85;color:var(--on-dark);max-width:50ch;margin:28px 0 0}
 .jb .hero-lead b{color:#fff;font-weight:600}
 .jb .hero-lead .hl{color:#fff;font-weight:600;position:relative;
@@ -693,6 +697,12 @@ const STYLES = `
 .jb .profile .profile-head{padding:0 0 14px}
 
 /* ── 자기소개 문단 ── */
+.jb .intro{padding:0 0 32px;margin-bottom:32px;border-bottom:1px solid var(--line-2)}
+.jb .intro .lead{font-size:20.5px;line-height:1.7;font-weight:600;color:var(--text);
+  letter-spacing:-.03em;margin:0 0 20px;max-width:44ch}
+.jb .intro .lead em{font-style:normal;color:var(--accent)}
+.jb .intro p{margin:0 0 16px}
+.jb .intro p:last-child{margin-bottom:0}
 .jb .ab{padding:0 0 30px;margin-bottom:30px;border-bottom:1px solid var(--line-2)}
 .jb .ab:last-child{border-bottom:0;padding-bottom:0;margin-bottom:0}
 .jb .ab h4{display:flex;align-items:center;gap:12px;margin:0 0 14px;
@@ -748,6 +758,21 @@ const STYLES = `
 .jb .tl::before{background:linear-gradient(180deg,var(--accent-soft),var(--line) 22%,var(--line))}
 .jb .tl .when{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.02em}
 .jb .tl .what{font-size:17px;font-weight:700;margin-top:4px;letter-spacing:-.025em}
+.jb .tl .top{display:flex;gap:14px;align-items:flex-start}
+.jb .tl .logo{flex:none;width:46px;height:46px;margin-top:2px;border-radius:12px;
+  border:1px solid var(--line);background:#fff;padding:6px;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+  box-shadow:0 2px 8px -6px rgba(8,18,28,.5)}
+.jb .tl .logo img{width:100%;height:100%;object-fit:contain;display:block}
+.jb .tl .curr{margin-top:14px;max-width:76ch;padding:15px 18px;border-radius:12px;
+  background:var(--surface-2);border:1px solid var(--line)}
+.jb .tl .curr .ch{font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+  color:var(--muted);text-transform:uppercase;margin-bottom:10px}
+.jb .tl .crow{display:flex;gap:14px;align-items:baseline;padding:5px 0}
+.jb .tl .crow + .crow{border-top:1px solid var(--line)}
+.jb .tl .crow .ca{flex:none;width:66px;font-size:12.5px;font-weight:700;color:var(--accent);
+  letter-spacing:-.01em}
+.jb .tl .crow .ci{font-size:13.5px;color:var(--muted);line-height:1.7}
 .jb .tl .detail{font-size:14.5px;color:var(--muted);margin-top:6px;line-height:1.75;max-width:76ch}
 .jb .tl .kids{display:grid;gap:8px;margin-top:16px;max-width:76ch}
 .jb .tl .kid{display:flex;gap:14px;align-items:baseline;width:100%;text-align:left;
@@ -773,6 +798,23 @@ const STYLES = `
 .jb .qa .q{font-size:clamp(19px,2.4vw,24px);font-weight:700;line-height:1.45;margin:0 0 12px;letter-spacing:-.03em}
 .jb .qa .a{margin:0;color:var(--on-dark);font-size:15.5px;line-height:1.85;max-width:72ch}
 .jb .qa .a b{color:var(--accent-lt);font-weight:600}
+.jb .ask-more{margin:22px 0 0;font-size:14.5px;color:var(--on-dark);line-height:1.8}
+.jb .ask-more b{color:#fff;font-weight:600}
+.jb .ask-more .lnk{color:var(--accent-lt);font-weight:600;font-size:14.5px;
+  text-decoration:underline;text-underline-offset:3px}
+
+/* ── CS 기초 정리 ── */
+.jb .basics{display:grid;gap:12px}
+.jb .basics .bg{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;color:var(--accent);
+  margin:30px 0 2px}
+.jb .basics .bg:first-child{margin-top:4px}
+.jb .basics .bq{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  padding:20px 24px;transition:border-color .22s,transform .22s}
+.jb .basics .bq:hover{border-color:color-mix(in srgb, var(--accent) 26%, transparent);
+  transform:translateX(3px)}
+.jb .basics .bqq{font-size:16px;font-weight:700;letter-spacing:-.025em;margin:0 0 9px}
+.jb .basics .bqa{margin:0;font-size:14.5px;line-height:1.8;color:var(--muted);max-width:78ch}
+.jb .basics .bqa b{color:var(--text);font-weight:600}
 
 /* ── 연락 ── */
 .jb .contact{background:var(--ink-2);color:#fff;position:relative;overflow:hidden}
@@ -1038,6 +1080,9 @@ const STYLES = `
   .jb .step{grid-template-columns:1fr;gap:6px}
   .jb .tl .kid{flex-direction:column;gap:6px;align-items:flex-start}
   .jb .tl .kid .karr{margin-left:0}
+  .jb .tl .curr{padding:14px 16px}
+  .jb .tl .crow{flex-direction:column;gap:3px;padding:7px 0}
+  .jb .tl .crow .ca{width:auto}
   .jb .pager{grid-template-columns:1fr}
   .jb .pager button.right{text-align:left}
 }
@@ -1238,7 +1283,7 @@ const Nav: React.FC<NavProps> = ({ page, go }) => {
         <div className="nav-in">
           <button className="brand" onClick={() => go("home")}>
             <i />
-            <span>LEE JONGBEEN · BACKEND</span>
+            <span>LEE JONGBEEN · FULL-STACK</span>
           </button>
           <nav className="nav-desk">{NAV.map(([k, l]) => item(k, l))}</nav>
           <button
@@ -1495,7 +1540,7 @@ const ROUTE: RouteStop[] = [
   { yr: "2024", what: "물류 · 영업 사무", note: "숫자와 검증을 배움" },
   { yr: "2025.11", what: "한국정보교육원", note: "자바 풀스택 & 생성형 AI · 6개월" },
   { yr: "2026.05", what: "SeSAC", note: "AWS·AI 활용 MSA · ~11.20", live: true },
-  { yr: "NOW", what: "백엔드 개발자로", note: "함께할 팀을 찾는 중", now: true },
+  { yr: "NOW", what: "풀스택 개발자로", note: "함께할 팀을 찾는 중", now: true },
 ];
 
 interface Metric {
@@ -1572,7 +1617,7 @@ const METRICS: Metric[] = [
   { num: 1900, u: "줄", l: "1차 프로젝트에서 제가 담당한<br>게시판 · 관리자 도메인 코드" },
 ];
 
-/** 자기소개 — 누구인가 / 왜 개발 / 왜 백엔드 / 지금 고민 / 어떻게 일하나 / 앞으로 */
+/** 자기소개 — 누구인가 / 왜 개발 / 어디까지 / 어떻게 배우나 / 지금 고민 / 어떻게 일하나 / 앞으로 */
 const ABOUT: [string, string][] = [
   [
     "지금 어디에 있는가",
@@ -1583,8 +1628,12 @@ const ABOUT: [string, string][] = [
     "개발은 어릴 때부터 하고 싶었지만 전공이 아니라는 이유로 계속 미뤄뒀습니다. 군 제대 후 진로를 두고 한참 방황하다 국비 지원 과정을 알게 되어, 반쯤은 막연한 마음으로 신청했습니다. 그런데 첫 팀 미션에서 클래스 다이어그램을 그리고 로그인 기능을 붙여보면서 <b>“내가 짠 것이 실제로 동작한다”</b>는 감각을 처음 느꼈습니다. 그때부터는 미뤄둔 일이 아니라 하고 싶은 일이 됐습니다.",
   ],
   [
-    "왜 백엔드인가",
-    "1차 프로젝트에서는 게시판과 관리자 페이지를 맡아 서버를 만들었고, 2차에서는 화면을 맡았습니다. 그런데 <b>2차에서 제가 해결한 두 건 모두 원인이 서버에 있었습니다.</b> 시장 검색이 비어 있던 건 데이터가 연결되지 않아서였고, QR이 안 뜬 건 서버에 이미지를 만드는 로직 자체가 없어서였습니다. 원인을 따라 계층을 내려가는 일이 화면을 다듬는 일보다 재미있었습니다. 그래서 백엔드를 택했습니다.",
+    "어디까지 다루는가",
+    "1차 프로젝트에서는 게시판과 관리자 페이지를 맡아 서버를 만들었고, 2차에서는 화면을 맡았습니다. 그런데 <b>2차에서 제가 해결한 두 건 모두 원인이 서버에 있었습니다.</b> 시장 검색이 비어 있던 건 데이터가 연결되지 않아서였고, QR이 안 뜬 건 서버에 이미지를 만드는 로직 자체가 없어서였습니다. 그때부터 <b>화면과 서버를 나눠서 보지 않게 됐습니다.</b> 서버를 중심에 두되, 화면·AI 연동·배포까지 같은 서비스의 앞뒤로 봅니다.",
+  ],
+  [
+    "어떻게 배우는가",
+    "수업을 들을 때는 <b>배운 것을 그날 안에 제 문장으로 다시 적어두는</b> 방식으로 익혔습니다. 그리고 새 기능을 맡으면 착수 하루이틀 전부터 미리 찾아봤습니다. 무한 스크롤과 Gemini 연동은 수업에서 배운 적이 없던 기술인데, 그 시간 덕분에 기한 안에 붙일 수 있었습니다. 모르는 기술이 나왔을 때 <b>얼마나 빨리 쓸 수 있는 상태로 만드는지</b>가 지금 제가 가진 가장 확실한 무기라고 생각합니다.",
   ],
   [
     "지금 무엇을 고민하는가",
@@ -1595,6 +1644,10 @@ const ABOUT: [string, string][] = [
     "혼자 빨리 가는 것보다 팀이 같이 가는 쪽을 좋아합니다. 1차 프로젝트에서 팀원들이 부담스러워한 발표자료 제작과 최종 발표를 맡았는데, 그러려면 <b>제가 짜지 않은 OAuth와 WebSocket까지 이해해야 했습니다.</b> 결과적으로 프로젝트 전체를 설명할 수 있는 사람이 됐고, 그게 제가 가장 많이 배운 방식이었습니다.",
   ],
   [
+    "무엇이 재미있는가",
+    "만든 것이 <b>제 컴퓨터 밖에서도 돌아가는 순간</b>이 가장 재미있습니다. 국비 과정에서 프로젝트를 Vercel과 AWS에 올려보고, Docker와 GitHub Actions로 배포를 자동화해보면서 그 감각을 처음 느꼈습니다. 지금 SeSAC에서 클라우드와 배포를 다시 배우고 있는 것도 그래서입니다. 기능을 만드는 일과 그 기능이 사용자에게 닿게 하는 일을 <b>같은 일로 보고 싶습니다.</b>",
+  ],
+  [
     "무엇이 부족하고, 무엇을 채울 것인가",
     "부족한 곳은 분명합니다. <b>쿼리 실행 계획을 읽고 인덱스를 스스로 판단하는 단계</b>까지는 아직 가지 못했고, 제 도메인에 테스트 코드를 직접 붙여본 적도 없습니다. 세 번의 회고에 같은 아쉬움을 적어놓고 미뤄왔으니 다음엔 그것부터 하려 합니다. 코드만 아는 개발자가 아니라 <b>데이터와 배포까지 설명할 수 있는 사람</b>이 되는 것이 목표입니다.",
   ],
@@ -1603,13 +1656,13 @@ const ABOUT: [string, string][] = [
 /** 프로필 기본 정보 */
 const PROFILE: [string, string][] = [
   ["이름", "이종빈 · LEE JONGBEEN"],
-  ["출생", "1997년"],
+  ["출생", "1997년 11월 19일"],
   ["거주", "서울 구로구"],
   ["학력", "안양대학교 식품영양학과 (4년제 수료)"],
   ["이전 경력", "물류 · 영업 · 회계 사무 1년 11개월"],
   ["개발 시작", "2025년 11월"],
   ["현재", "SeSAC 재학 중 (~2026.11.20)"],
-  ["희망 직무", "백엔드 개발자 (Java · Spring Boot)"],
+  ["희망 직무", "풀스택 개발자 — 서버 · 화면 · AI 연동 · 클라우드 배포"],
 ];
 
 /** 입사 후 포부 (이력서 기준) */
@@ -1666,9 +1719,19 @@ const CAN_DO: [string, string, string][] = [
     "1차 · 2차 · 3차",
   ],
   [
-    "화면 연동과 문제 추적",
-    "React로 API를 붙이고, 이상이 보이면 브라우저 → 프록시 → 컨트롤러 → 서비스 순으로 범위를 좁힙니다.",
+    "React 화면 구현",
+    "라우팅·공통 컴포넌트부터 도메인 화면까지. 2차에서 냉장고·레시피·상인 화면을 약 1,900줄 작성했습니다.",
     "2차 · 3차",
+  ],
+  [
+    "LLM · RAG 서비스 연동",
+    "Gemini로 글 요약 기능을 만들고, Groq·ChromaDB 기반 유사 재료 검색을 화면에 붙였습니다. 프롬프트 설계, 캐싱, 타임아웃, 실패 시 대체 동작까지 함께 정합니다.",
+    "1차 · 2차",
+  ],
+  [
+    "화면 ↔ 서버 문제 추적",
+    "이상이 보이면 브라우저 → 프록시 → 컨트롤러 → 서비스 순으로 계층을 가리지 않고 범위를 좁힙니다.",
+    "1차 · 2차 · 3차",
   ],
 ];
 
@@ -1687,7 +1750,7 @@ const WHY: WhyCard[] = [
   {
     tag: "02 · 경계를 넘는 시야",
     h: "화면을 맡았지만<br>서버를 고쳤습니다",
-    p: "2차 프로젝트에서 제 담당은 프론트엔드였습니다. 그런데 QR이 안 뜨는 이유도, 시장 검색이 비는 이유도 전부 서버에 있었습니다. <b>내 담당이 아니라는 이유로 멈추지 않고</b> 원인이 있는 계층까지 내려갔습니다. 그 경험이 백엔드를 택한 이유가 됐습니다.",
+    p: "2차 프로젝트에서 제 담당은 프론트엔드였습니다. 그런데 QR이 안 뜨는 이유도, 시장 검색이 비는 이유도 전부 서버에 있었습니다. <b>내 담당이 아니라는 이유로 멈추지 않고</b> 원인이 있는 계층까지 내려갔습니다. 그 경험이 <b>한 계층에만 머물지 않는 개발자</b>가 되기로 한 이유가 됐습니다.",
   },
   {
     tag: "03 · 이어지는 성장",
@@ -1747,7 +1810,7 @@ const STACK: StackGroup[] = [
       ["Swagger", "API 문서화"],
     ],
     memo:
-      "가장 채우고 싶은 것은 <b>쿼리 성능</b>입니다. 실행 계획을 읽고 인덱스를 스스로 판단하는 단계까지는 아직 가지 못했습니다.",
+      "<b>클라우드 · 인프라</b>는 아직 이 단계입니다. 국비 과정에서 AWS·Vercel 배포와 Docker·GitHub Actions 자동화를 실습했고, 지금 SeSAC에서 컨테이너 배포와 CI/CD, MSA 구조를 다시 다루고 있습니다. 과장 없이 <b>지금 수준 그대로</b> 적었습니다. 그 외에 가장 채우고 싶은 것은 <b>쿼리 성능</b>으로, 실행 계획을 읽고 인덱스를 스스로 판단하는 단계까지는 아직 가지 못했습니다.",
   },
 ];
 
@@ -1778,21 +1841,44 @@ interface TimelineChild {
   key?: ProjectKey;
 }
 
+/** 교육과정에서 다룬 분야 한 줄. area 는 분류, items 는 그 안의 기술입니다. */
+interface Curriculum {
+  area: string;
+  items: string;
+}
+
 interface TimelineItem {
   when: string;
   what: string;
   detail: string;
   on?: boolean;
+  /** 교육기관 로고 (public/logos/) */
+  logo?: string;
+  /** 로고 대체 텍스트 */
+  logoAlt?: string;
+  /** 배운 내용 (교육과정에만 있습니다) */
+  curriculum?: Curriculum[];
   /** 이 과정 안에서 진행한 프로젝트 */
   children?: TimelineChild[];
 }
+
+/** 교육기관 로고 경로. base 설정을 그대로 따라갑니다. */
+const LOGO_BASE = `${import.meta.env.BASE_URL}logos`;
 
 const TIMELINE: TimelineItem[] = [
   {
     when: "2026.05.18 – 11.20",
     what: "SeSAC · AWS와 AI를 활용한 MSA 기반 웹 서비스 개발",
-    detail: "6개월 과정, 현재 수강 중. 클라우드 배포와 마이크로서비스 구조를 다루고 있습니다.",
+    detail:
+      "서울시가 운영하는 청년 개발자 교육기관(Seoul Software Academy)의 6개월 과정입니다. 앞선 국비 과정을 수료하고 닷새 뒤에 바로 이어서 시작했고, 2026년 11월 20일에 수료합니다. 풀스택 기초를 한 번 훑은 뒤라, 이번에는 서비스를 어떻게 나누고 어떻게 배포하는지에 집중하고 있습니다.",
     on: true,
+    logo: `${LOGO_BASE}/sesac.png`,
+    logoAlt: "SeSAC (Seoul Software Academy) 로고",
+    curriculum: [
+      { area: "클라우드", items: "AWS 기반 서비스 배포" },
+      { area: "아키텍처", items: "MSA(마이크로서비스) 구조 설계" },
+      { area: "배포", items: "컨테이너 배포 · CI/CD" },
+    ],
     children: [
       {
         label: "3차 · Basecamp",
@@ -1803,9 +1889,22 @@ const TIMELINE: TimelineItem[] = [
   },
   {
     when: "2025.11.10 – 2026.05.13",
-    what: "한국정보교육원 · 자바 풀스택 & 생성형 AI 서비스 개발",
+    what: "한국정보교육원 · 현업에서 바로 통하는 자바 풀스택 & 생성형 AI 서비스 개발",
     detail:
-      "6개월 과정 수료. Java·Spring·MySQL·React·LLM/RAG·AWS·Docker를 배우며 팀 프로젝트 두 건을 완주했습니다.",
+      "개발을 처음 시작한 국비지원 훈련과정이고, 6개월 과정을 수료했습니다. 비전공자로 진로를 고민하던 중에 시작해, Java 기초부터 Spring Boot·MySQL·React와 LLM/RAG까지 풀스택 전 범위를 배웠습니다. 배운 기술을 곧바로 팀 미션과 팀 프로젝트 두 건에 적용하며 완주했습니다.",
+    logo: `${LOGO_BASE}/kie.png`,
+    logoAlt: "한국정보교육원 로고",
+    curriculum: [
+      { area: "언어", items: "Java (JDK 11 · 17 · 21) · Python · JavaScript" },
+      {
+        area: "백엔드",
+        items: "JSP · Servlet · Spring Framework · Spring Boot · MyBatis · REST API · DI · AOP",
+      },
+      { area: "데이터", items: "MySQL · ERD 설계 · DDL/DML · 동적 SQL · 결과 매핑" },
+      { area: "프론트", items: "HTML5 · CSS3 · jQuery · Bootstrap · React (Router · Hook)" },
+      { area: "AI", items: "LLM · RAG · 프롬프트 엔지니어링 · OpenAI · Gemini API 연동" },
+      { area: "배포 · 협업", items: "AWS · Docker · GitHub Actions · Vercel · Git/GitHub · Notion" },
+    ],
     children: [
       {
         label: "2차 · PLEEGIE",
@@ -1816,6 +1915,10 @@ const TIMELINE: TimelineItem[] = [
         label: "1차 · 대동여집도",
         desc: "인증 거주 후기 커뮤니티 — 게시판 · 관리자 백엔드 + 팀 대표 발표",
         key: "zipmap",
+      },
+      {
+        label: "팀 미션 · 서점 프로그램",
+        desc: "Java(JDK 11) 콘솔 프로그램 — 클래스 다이어그램 작성, 회원 로그인 · 관리자 기능 구현",
       },
     ],
   },
@@ -1836,12 +1939,17 @@ const TIMELINE: TimelineItem[] = [
       "6개월. 매장 관리와 고객 응대, 사장님을 도와 홍보까지 맡았습니다. 사람이 실제로 서비스를 어떻게 쓰는지 가장 가까이서 본 시간입니다.",
   },
   {
+    when: "2021.04 – 2023.01",
+    what: "병역 · 사회복무요원 소집해제",
+    detail: "군 복무를 마쳤습니다. 이후 진로를 다시 정하는 데 시간을 썼고, 그 끝에 개발을 택했습니다.",
+  },
+  {
     when: "2017.07 – 2018.05",
     what: "캘리스코 사보텐 · 주방·홀 보조",
     detail: "11개월. 주방 보조와 홀·매장 관리. 팀으로 움직이는 일에 익숙해진 첫 경험이었습니다.",
   },
   {
-    when: "2017.03 –",
+    when: "2017.03 – 2024.02",
     what: "안양대학교 식품영양학과 (4년제 수료)",
     detail:
       "학점 3.1 / 4.5 · 2017.06 아리비교과 에세이 공모전 3등. 그 전에는 대일고등학교 이과계열을 졸업했습니다.",
@@ -1868,6 +1976,73 @@ const ASK: AskItem[] = [
   },
 ];
 
+/** CS 기초 정리. 면접 대비로 직접 정리한 내용을 제 문장으로 옮겼습니다. */
+interface BasicGroup {
+  g: string;
+  items: AskItem[];
+}
+
+const BASICS: BasicGroup[] = [
+  {
+    g: "JAVA · JVM",
+    items: [
+      {
+        q: "Java를 한 문장으로 설명한다면?",
+        a: "<b>JVM 위에서 동작해 운영체제를 가리지 않는</b> 객체지향 언어입니다. 가비지 컬렉션이 메모리를 자동으로 정리해주고, 언어 차원에서 멀티스레드를 지원합니다. 캡슐화·상속·다형성으로 복잡한 로직을 구조로 나눠 담을 수 있다는 점이 실제로 코드를 쓰면서 가장 크게 느낀 장점입니다.",
+      },
+      {
+        q: "JVM은 무슨 일을 하나요?",
+        a: '소스 파일이 컴파일되어 <b>바이트코드</b>가 되면, 클래스 로더가 실행 시점에 이를 JVM의 런타임 영역으로 올립니다. 그다음 실행 엔진이 기계어로 바꿔 실행하는데, <b>인터프리터</b>는 한 줄씩 해석하고 <b>JIT 컴파일러</b>는 반복되는 구간을 통째로 미리 컴파일해 캐싱합니다. 그래서 오래 도는 코드일수록 빨라집니다.',
+      },
+      {
+        q: "스택과 힙은 어떻게 다른가요?",
+        a: "<b>스택</b>에는 메서드를 호출할 때 만들어지는 지역변수·매개변수·리턴값이 담기고, 스레드마다 따로 생겨 서로 공유되지 않습니다. 메서드가 끝나면 그 프레임이 바로 사라집니다. <b>힙</b>에는 <code class=\"mono\">new</code>로 만든 객체와 배열이 담기고 모든 스레드가 함께 씁니다. 참조가 끊긴 객체는 가비지 컬렉션의 대상이 됩니다.",
+      },
+      {
+        q: "객체를 매개변수로 넘기면 무엇이 복사되나요?",
+        a: "Java는 <b>값에 의한 호출</b>입니다. 객체 자체가 아니라 <b>참조값(주소)의 복사본</b>이 넘어갑니다. 넘어간 주소가 원본과 같은 힙 객체를 가리키므로 필드를 바꾸면 원본에도 반영되지만, 매개변수에 새 객체를 다시 할당하면 그 변수가 가리키는 주소만 바뀔 뿐 <b>바깥의 원본은 그대로</b>입니다.",
+      },
+      {
+        q: "List · Set · Map은 언제 나눠 쓰나요?",
+        a: "<b>List</b>는 순서가 있고 중복을 허용해서 게시판 목록처럼 순서가 의미를 갖는 곳에 씁니다. <b>Set</b>은 순서가 없고 중복을 허용하지 않아 고유한 값의 집합에 적합합니다. <b>Map</b>은 키-값 쌍으로 담고 키가 중복될 수 없어, 설정값이나 캐시처럼 키로 바로 찾아야 하는 곳에 유리합니다.",
+      },
+      {
+        q: "오토박싱은 왜 조심해서 써야 하나요?",
+        a: '박싱은 겉보기와 달리 <b>내부에서 객체를 만드는 일</b>이라, 반복문 안에서 무분별하게 일어나면 힙에 불필요한 객체가 쌓여 가비지 컬렉션 부하로 이어집니다. 반대 방향인 언박싱은 래퍼 변수가 <code class="mono">null</code>인 상태에서 연산하면 <b>NullPointerException</b>이 납니다. 그래서 기본 타입으로 둘 수 있으면 기본 타입을 먼저 고려합니다.',
+      },
+      {
+        q: "접근 제한자 네 가지를 설명해 주세요.",
+        a: '<code class="mono">public</code>은 어디서든, <code class="mono">protected</code>는 같은 패키지와 상속받은 자식 클래스에서, 아무것도 붙이지 않는 <code class="mono">default</code>는 같은 패키지 안에서만, <code class="mono">private</code>은 그 클래스 안에서만 접근할 수 있습니다. 필드는 대체로 <code class="mono">private</code>으로 닫아두고 <b>필요한 통로만 열어</b> 의도치 않은 수정을 막습니다.',
+      },
+    ],
+  },
+  {
+    g: "객체지향 · 설계 · 데이터",
+    items: [
+      {
+        q: "객체지향의 네 가지 특징은 무엇인가요?",
+        a: "<b>캡슐화</b>는 데이터와 메서드를 묶고 내부 구현을 감춰 결합도를 낮춥니다. <b>상속</b>은 공통 기능을 물려받아 중복을 줄입니다. <b>다형성</b>은 같은 인터페이스로 서로 다른 동작을 하게 해 확장에 유리합니다. <b>추상화</b>는 핵심만 남기고 세부를 걷어내 복잡도를 관리합니다.",
+      },
+      {
+        q: "오버로딩과 오버라이딩의 차이는?",
+        a: "<b>오버로딩</b>은 이름은 같지만 <b>매개변수의 타입·개수·순서</b>가 다른 메서드를 여러 개 두는 것입니다. <b>오버라이딩</b>은 부모에게 물려받은 메서드를 자식 쪽 사정에 맞게 다시 정의하는 것입니다. 앞은 같은 클래스 안의 이야기이고, 뒤는 상속 관계에서의 이야기입니다.",
+      },
+      {
+        q: "인터페이스와 추상 클래스는 언제 나눠 쓰나요?",
+        a: "서로 <b>관련이 없는 클래스들이 같은 기능을 수행해야 할 때</b>는 인터페이스를 씁니다. 반대로 클래스들 사이의 연관이 깊고 <b>공통 상태와 기능을 함께 물려줘야 할 때</b>는 추상 클래스를 씁니다. 3차 프로젝트에서 날씨·인증 클라이언트를 인터페이스로 두고 구현체를 갈아 끼운 것도 앞쪽 경우였습니다.",
+      },
+      {
+        q: "트랜잭션의 ACID를 설명해 주세요.",
+        a: '<b>원자성</b>은 전부 반영되거나 하나도 반영되지 않는 것, <b>일관성</b>은 작업이 끝난 뒤에도 데이터베이스가 규칙을 지킨 상태로 남는 것, <b>격리성</b>은 다른 작업의 간섭을 받지 않는 것, <b>지속성</b>은 성공한 결과가 장애 뒤에도 남는 것입니다. 정상 처리는 <code class="mono">commit</code>으로 확정하고, 도중에 오류가 나면 <code class="mono">rollback</code>으로 시작 전 상태로 되돌립니다.',
+      },
+      {
+        q: "DAO와 DTO는 왜 나누나요?",
+        a: "<b>DAO</b>는 데이터베이스 접근만 전담하는 객체이고, <b>DTO</b>는 로직 없이 계층 사이를 오가는 데이터 그릇입니다. 나눠두면 관심사가 분리돼 고칠 곳이 명확해집니다. DTO를 만들 때는 <b>필요한 필드만 담아</b> 전송량을 줄이고, 밖으로 나가면 안 되는 값이 섞이지 않게 하는 데 신경 씁니다.",
+      },
+    ],
+  },
+];
+
 /* ══════════════════════════════════════════════════════════════════════
    메뉴 입구 (홈 랜딩)
    ══════════════════════════════════════════════════════════════════════ */
@@ -1882,7 +2057,7 @@ const ENTRIES: Entry[] = [
   {
     key: "about",
     title: "자기소개",
-    desc: "비전공에서 백엔드까지 — 어떤 사람이고 어떻게 일하는지",
+    desc: "비전공에서 풀스택까지 — 어떤 사람이고 어떻게 일하는지",
     meta: "프로필 · 강점 · 일하는 방식 · 면접 질문",
   },
   {
@@ -1895,7 +2070,7 @@ const ENTRIES: Entry[] = [
     key: "stack",
     title: "기술",
     desc: "할 수 있는 것과 아직 못 하는 것을 나눠 적었습니다",
-    meta: "숙련도 3단계 · 프로젝트별 사용 기술",
+    meta: "숙련도 3단계 · 프로젝트별 사용 기술 · CS 기초",
   },
   {
     key: "history",
@@ -1925,16 +2100,20 @@ const HomePage: React.FC<{ go: (p: Page) => void }> = ({ go }) => (
           <div>
             <span className="pill">
               <i />
-              BACKEND ENGINEER · 신입 · SEOUL
+              FULL-STACK ENGINEER · 신입 · SEOUL
             </span>
             <h1>
-              이종빈
-              <span className="sub">Java · Spring Boot · MySQL</span>
+              <span className="pre">안 되는 이유를 끝까지 찾아내는</span>
+              풀스택 개발자
+              <br />
+              이종빈입니다.
+              <span className="sub">Java · Spring Boot · React · AWS · LLM</span>
             </h1>
             <p className="hero-lead">
-              식품영양학과를 나와 사무직으로 일하다, 2025년 11월에 개발을 시작했습니다. 그 뒤로
-              교육과정 두 개를 쉬지 않고 이어가며 팀 프로젝트 세 건을 맡았습니다. 제가 가장 잘하는 일은{" "}
-              <span className="hl">안 되는 이유를 끝까지 찾아내는 것</span>입니다.
+              식품영양학과를 나와 사무직으로 일하다, 2025년 11월에 개발을 시작했습니다. 교육과정 두
+              개를 쉬지 않고 이어가며, 팀 프로젝트 세 건에서{" "}
+              <span className="hl">서버와 화면, AI 연동과 배포</span>를 함께 다뤘습니다. 코드를 다시
+              읽기 전에 네트워크 탭부터 여는 습관이 지금의 저를 만들었습니다.
             </p>
             <div className="cta">
               <button className="btn primary" onClick={() => go("work")}>
@@ -1959,7 +2138,7 @@ const HomePage: React.FC<{ go: (p: Page) => void }> = ({ go }) => (
         </div>
 
         <div className="route">
-          <p className="route-head">비전공에서 백엔드까지 — 지나온 경로</p>
+          <p className="route-head">비전공에서 풀스택까지 — 지나온 경로</p>
           <ol className="rail">
             {ROUTE.map((s, i) => (
               <React.Fragment key={s.yr + s.what}>
@@ -2144,10 +2323,10 @@ const AboutPage: React.FC<{ go: (p: Page) => void }> = ({ go }) => (
         <>
           식품영양학과를 나와,
           <br />
-          서버 앞에 앉기까지.
+          서비스를 통째로 보기까지.
         </>
       }
-      lead="이력서 한 장으로는 잘 전달되지 않는 것들을 적었습니다. 어떤 사람이고, 왜 백엔드이고, 팀에서는 어떻게 움직이는지."
+      lead="이력서 한 장으로는 잘 전달되지 않는 것들을 적었습니다. 어떤 사람이고, 무엇을 어디까지 다룰 수 있고, 팀에서는 어떻게 움직이는지."
       photo
     >
       <div className="p-facts">
@@ -2164,6 +2343,32 @@ const AboutPage: React.FC<{ go: (p: Page) => void }> = ({ go }) => (
       <div className="wrap">
         <Rv className="about">
           <div className="about-text">
+            <div className="intro">
+              <p className="lead">
+                비전공에서 출발해, <em>서버부터 화면과 배포까지 한 흐름으로 보는 개발자</em>가
+                됐습니다.
+              </p>
+              <p>
+                식품영양학과를 나와 물류·영업·회계 사무로 1년 11개월을 일했고,{" "}
+                <b>2025년 11월에 개발을 시작했습니다.</b> 국비 과정 6개월을 수료한 뒤 닷새 만에 SeSAC
+                과정으로 이어갔고, 그 사이 팀 프로젝트 세 건을 맡았습니다.
+              </p>
+              <p>
+                서버는 <b>Java · Spring Boot · MySQL</b>로, 화면은 <b>React</b>로 만듭니다. 1차에서는
+                게시판과 관리자 도메인을 통째로 맡았고, 2차에서는 화면을 맡았다가 원인이 서버에 있어
+                서버까지 내려갔습니다. 3차에서는 <b>외부 API가 멈춰도 서비스가 버티게 하는 문제</b>를
+                가장 오래 붙들었습니다.
+              </p>
+              <p>
+                기능을 만드는 데서 끝내지 않으려 합니다. <b>Gemini · Groq로 LLM과 RAG</b>를 서비스
+                기능으로 붙여봤고, <b>AWS · Docker · GitHub Actions</b>로 배포를 다뤄봤습니다. 지금은
+                SeSAC에서 <b>클라우드와 MSA, CI/CD</b>를 다시 배우고 있습니다.
+              </p>
+              <p>
+                아직 못 하는 것도 아래에 그대로 적었습니다. <b>실행 계획을 읽고 인덱스를 판단하는 일</b>과{" "}
+                <b>테스트 코드</b>가 다음 차례입니다.
+              </p>
+            </div>
             {ABOUT.map(([q, t], i) => (
               <section className="ab" key={q}>
                 <h4>
@@ -2179,7 +2384,7 @@ const AboutPage: React.FC<{ go: (p: Page) => void }> = ({ go }) => (
               <img src={PHOTO} alt="이종빈" />
               <div>
                 <b>이종빈</b>
-                <span>백엔드 개발자 지망 · 신입</span>
+                <span>풀스택 개발자 지망 · 신입</span>
               </div>
             </div>
             <div className="profile-head">
@@ -2273,6 +2478,13 @@ const AboutPage: React.FC<{ go: (p: Page) => void }> = ({ go }) => (
               <p className="a" dangerouslySetInnerHTML={{ __html: x.a }} />
             </li>
           ))}
+        </Rv>
+        <Rv as="p" className="ask-more">
+          JVM·컬렉션·트랜잭션 같은 <b>CS 기초 질문</b>에 대한 제 정리는{" "}
+          <button className="lnk" onClick={() => go("stack")}>
+            기술 페이지 →
+          </button>
+          에 따로 적어두었습니다.
         </Rv>
       </div>
     </section>
@@ -2398,7 +2610,7 @@ const StackPage: React.FC<{ go: (p: Page) => void }> = ({ go }) => (
           아직 못 하는 것.
         </>
       }
-      lead="신입에게 중요한 건 목록의 길이가 아니라 어디까지 해봤는지라고 생각합니다. 그래서 세 단계로 나누고, 어느 프로젝트에서 썼는지까지 표로 적었습니다."
+      lead="서버 · 화면 · AI 연동 · 배포 네 갈래를 모두 만져봤습니다. 다만 신입에게 중요한 건 목록의 길이가 아니라 어디까지 해봤는지라고 생각해, 숙련도를 세 단계로 나누고 어느 프로젝트에서 썼는지까지 표로 적었습니다."
     />
 
     <section>
@@ -2496,6 +2708,29 @@ const StackPage: React.FC<{ go: (p: Page) => void }> = ({ go }) => (
           팀 프로젝트라 <b>제가 직접 다룬 것만</b> 표시했습니다. 팀원이 구현하고 저는 발표를 위해 읽기만 한
           기능(예: 1차의 WebSocket 알림)은 “읽고 따라갈 수 있는 것”에 가깝습니다.
         </Rv>
+
+        <Rv className="subhead">
+          <span className="n">BASICS</span>
+          <h3>기술 기초는 이렇게 이해하고 있습니다</h3>
+          <span className="ln" />
+        </Rv>
+        <Rv as="p" className="api-note">
+          면접에서 자주 물으시는 CS 기초입니다. 외운 문장을 옮기지 않고 <b>제가 이해한 말로</b> 적었고,
+          프로젝트에서 실제로 부딪힌 경우에는 그 사례를 함께 붙였습니다.
+        </Rv>
+        <Rv className="basics">
+          {BASICS.map((grp) => (
+            <React.Fragment key={grp.g}>
+              <div className="bg">{grp.g}</div>
+              {grp.items.map((x) => (
+                <div className="bq" key={x.q}>
+                  <p className="bqq">{x.q}</p>
+                  <p className="bqa" dangerouslySetInnerHTML={{ __html: x.a }} />
+                </div>
+              ))}
+            </React.Fragment>
+          ))}
+        </Rv>
       </div>
     </section>
 
@@ -2524,9 +2759,29 @@ const HistoryPage: React.FC<{ go: (p: Page) => void }> = ({ go }) => (
         <Rv as="ol" className="tl">
           {TIMELINE.map((t) => (
             <li key={t.what} className={t.on ? "on" : ""}>
-              <div className="when">{t.when}</div>
-              <div className="what">{t.what}</div>
+              <div className="top">
+                {t.logo && (
+                  <span className="logo">
+                    <img src={t.logo} alt={t.logoAlt ?? ""} width="46" height="46" loading="lazy" />
+                  </span>
+                )}
+                <div>
+                  <div className="when">{t.when}</div>
+                  <div className="what">{t.what}</div>
+                </div>
+              </div>
               <div className="detail">{t.detail}</div>
+              {t.curriculum && (
+                <div className="curr">
+                  <div className="ch">배운 것</div>
+                  {t.curriculum.map((c) => (
+                    <div className="crow" key={c.area}>
+                      <span className="ca">{c.area}</span>
+                      <span className="ci">{c.items}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
               {t.children && (
                 <div className="kids">
                   {t.children.map((c) =>
@@ -2559,7 +2814,7 @@ const HistoryPage: React.FC<{ go: (p: Page) => void }> = ({ go }) => (
    ══════════════════════════════════════════════════════════════════════ */
 const HIRE: [string, string][] = [
   ["근무 가능 시기", "2026년 11월 20일 SeSAC 수료 후 · 시기 협의 가능"],
-  ["희망 직무", "백엔드 개발자 (Java · Spring Boot)"],
+  ["희망 직무", "풀스택 개발자 — 서버 · 화면 · AI 연동 · 클라우드 배포"],
   ["근무 지역", "서울 · 수도권"],
   ["고용 지원", "청년취업지원 프로그램 이수 · 고용지원금 지원 대상"],
 ];
@@ -3105,7 +3360,7 @@ try {
     archCap: '브라우저는 항상 <b>같은 주소</b>로만 요청하고, Vite 프록시가 <code class="mono">/api</code>는 8080으로 <code class="mono">/ai</code>는 8000으로 나눠 보냅니다. 화면 입장에서는 서버가 하나로 보이고, 서버끼리는 <code class="mono">AiClient</code>로 통신합니다.',
 
     scopeTitle: "화면을 맡았지만,<br>원인이 서버에 있으면 서버로 갔습니다",
-    scopeLead: "공식 역할은 프론트엔드였습니다. 다만 제가 해결한 두 건은 <b>원인이 전부 서버에 있었고</b>, 그 과정에서 JPA와 위치 기반 쿼리를 직접 읽고 고쳤습니다. 백엔드로 지원하는 이유이기도 합니다.",
+    scopeLead: "공식 역할은 프론트엔드였습니다. 다만 제가 해결한 두 건은 <b>원인이 전부 서버에 있었고</b>, 그 과정에서 JPA와 위치 기반 쿼리를 직접 읽고 고쳤습니다. 화면과 서버를 나눠 보지 않게 된 계기이기도 합니다.",
     scope: [
       {
         badge: "담당 01",
@@ -3266,7 +3521,7 @@ useEffect(() => {
 
     retro: {
       good: [
-        "화면만 보지 않고 <b>서버 코드를 읽고 원인을 짚어냈습니다.</b> 백엔드로 방향을 정한 결정적 계기였습니다.",
+        "화면만 보지 않고 <b>서버 코드를 읽고 원인을 짚어냈습니다.</b> 계층을 가리지 않고 원인을 쫓는 방식이 자리 잡은 계기였습니다.",
         "React 컴포넌트를 분리하면서 <b>프론트와 백엔드의 계약(API 명세)</b>이 왜 중요한지 체감했습니다.",
         "Java · Python · React가 각각 어떤 일에 강한지 직접 비교하며 배웠습니다.",
       ],
