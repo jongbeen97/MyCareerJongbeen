@@ -128,14 +128,14 @@ const HUE = {
 
 /** Hue 를 CSS 변수로 변환 */
 const hueVars = (h: Hue): React.CSSProperties =>
-  ({
-    "--accent": h.a,
-    "--accent-lt": h.lt,
-    "--accent-deep": h.deep,
-    "--accent-soft": h.soft,
-    "--accent-glow": h.glow,
-    "--grad": h.grad,
-  } as React.CSSProperties);
+({
+  "--accent": h.a,
+  "--accent-lt": h.lt,
+  "--accent-deep": h.deep,
+  "--accent-soft": h.soft,
+  "--accent-glow": h.glow,
+  "--grad": h.grad,
+} as React.CSSProperties);
 
 export interface Project {
   /* 메인 카드 */
@@ -204,7 +204,7 @@ export interface Project {
    2. STYLES
    ══════════════════════════════════════════════════════════════════════ */
 const STYLES = `
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap');
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
 
 .jb{
@@ -244,7 +244,7 @@ const STYLES = `
   --sh-glow:0 24px 60px -26px var(--accent-glow);
 
   /* 글꼴 */
-  --body:"Pretendard Variable","Pretendard",-apple-system,system-ui,"Malgun Gothic",sans-serif;
+  --body:"JetBrains Mono","Pretendard Variable","Pretendard",-apple-system,system-ui,"Malgun Gothic",sans-serif;
   --mono:"JetBrains Mono","IBM Plex Mono",ui-monospace,Menlo,monospace;
   --wrap:1160px;
 
@@ -1283,7 +1283,7 @@ const Nav: React.FC<NavProps> = ({ page, go }) => {
         <div className="nav-in">
           <button className="brand" onClick={() => go("home")}>
             <i />
-            <span>LEE JONGBEEN · FULL-STACK</span>
+            <span>Devloper Jongbeen Lee - FULLSTACK Engineer</span>
           </button>
           <nav className="nav-desk">{NAV.map(([k, l]) => item(k, l))}</nav>
           <button
@@ -2887,7 +2887,7 @@ const C = {
   warn: "#CE4F38",
 } as const;
 
-const F = { sans: "Pretendard, sans-serif", mono: "JetBrains Mono, monospace" } as const;
+const F = { sans: "JetBrains Mono, Pretendard, sans-serif", mono: "JetBrains Mono, monospace" } as const;
 
 /* ── 대동여집도 구성도 ── */
 const ZipmapDiagram: React.FC<{ h: Hue }> = ({ h }) => (
