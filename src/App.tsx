@@ -525,6 +525,22 @@ const STYLES = `
 .jb .code pre .s{color:#E8B27A}
 .jb .code pre .a{color:#59D6A6}
 
+/* ── 다뤄본 기술 아이콘 (분야별) ── */
+.jb .techs{display:grid;gap:22px}
+.jb .tech-g .tg{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.jb .tech-g .tg b{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.12em;
+  color:var(--accent);white-space:nowrap}
+.jb .tech-g .tg i{flex:1;height:1px;background:var(--line);display:block}
+.jb .tech-g .tg em{font-family:var(--mono);font-size:11px;color:var(--muted);font-style:normal}
+.jb .tech-g .ti{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:10px}
+.jb .techs .tech{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  padding:18px 10px 14px;display:flex;flex-direction:column;align-items:center;gap:11px;
+  transition:transform .3s cubic-bezier(.2,.7,.3,1),box-shadow .3s,border-color .3s}
+.jb .techs .tech:hover{transform:translateY(-3px);box-shadow:var(--sh-md);border-color:var(--accent-soft)}
+.jb .techs .tech img{width:38px;height:38px;object-fit:contain;display:block}
+.jb .techs .tech b{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.02em;
+  color:var(--muted);text-align:center;line-height:1.35;word-break:keep-all}
+
 /* ── 기술 스택 ── */
 .jb .stack{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .jb .stack > div{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
@@ -764,6 +780,7 @@ const STYLES = `
   display:flex;align-items:center;justify-content:center;overflow:hidden;
   box-shadow:0 2px 8px -6px rgba(8,18,28,.5)}
 .jb .tl .logo img{width:100%;height:100%;object-fit:contain;display:block}
+.jb .tl .logo + .logo{margin-left:-6px}
 .jb .tl .curr{margin-top:14px;max-width:76ch;padding:15px 18px;border-radius:12px;
   background:var(--surface-2);border:1px solid var(--line)}
 .jb .tl .curr .ch{font-family:var(--mono);font-size:11px;letter-spacing:.08em;
@@ -1217,14 +1234,23 @@ interface NavProps {
   go: (p: Page) => void;
 }
 
+/** 헤더 메뉴에 들어가는 키 — 홈 + 주요 페이지 */
+type NavKey = "home" | SubPage;
+
 /** 메뉴 = 페이지. 순서대로 이어보게 만듭니다. */
-const NAV: [SubPage, string][] = [
+const NAV: [NavKey, string][] = [
+  ["home", "홈"],
   ["about", "자기소개"],
   ["work", "프로젝트"],
   ["stack", "기술"],
   ["history", "이력"],
   ["contact", "연락"],
 ];
+
+/** 이전·다음 이동은 홈을 뺀 본문 페이지끼리만 잇습니다. */
+const FLOW: [SubPage, string][] = NAV.filter(
+  (n): n is [SubPage, string] => n[0] !== "home"
+);
 
 /** 프로젝트 상세도 '프로젝트' 메뉴에 속한 것으로 표시합니다. */
 const isWorkPage = (p: Page): boolean =>
@@ -1268,7 +1294,7 @@ const Nav: React.FC<NavProps> = ({ page, go }) => {
     };
   }, [open]);
 
-  const item = (key: SubPage, label: string): React.ReactElement => {
+  const item = (key: NavKey, label: string): React.ReactElement => {
     const on = key === "work" ? isWorkPage(page) : page === key;
     return (
       <button key={key} className={on ? "on" : ""} onClick={() => go(key)}>
@@ -1308,7 +1334,7 @@ const Nav: React.FC<NavProps> = ({ page, go }) => {
                 style={{ animationDelay: `${i * 0.05}s` }}
                 onClick={() => go(k)}
               >
-                <span className="mn">{String(i + 1).padStart(2, "0")}</span>
+                <span className="mn">{String(i).padStart(2, "0")}</span>
                 {l}
                 <span className="ma">→</span>
               </button>
@@ -1354,9 +1380,9 @@ const PageHead: React.FC<{
 
 /* ── 다음 페이지로 이어지는 흐름 ── */
 const PageFlow: React.FC<{ current: SubPage; go: (p: Page) => void }> = ({ current, go }) => {
-  const i = NAV.findIndex(([k]) => k === current);
-  const prev = i > 0 ? NAV[i - 1] : null;
-  const next = i < NAV.length - 1 ? NAV[i + 1] : null;
+  const i = FLOW.findIndex(([k]) => k === current);
+  const prev = i > 0 ? FLOW[i - 1] : null;
+  const next = i < FLOW.length - 1 ? FLOW[i + 1] : null;
   return (
     <div className="wrap">
       <nav className="pager" style={{ paddingBottom: 96 }}>
@@ -1657,7 +1683,7 @@ const PROFILE: [string, string][] = [
   ["학력", "안양대학교 식품영양학과 (4년제 수료)"],
   ["이전 경력", "물류 · 영업 · 회계 사무 1년 11개월"],
   ["개발 시작", "2025년 11월"],
-  ["현재", "SeSAC 재학 중 (~2026.11.20)"],
+  ["현재", "CREDIF 개발팀 재직 중 — Java 백엔드 개발 / 운영 시스템 엔지니어링 (KTDS 포인트허브 운영 · 개발 파견)"],
   ["희망 직무", "풀스택 개발자 — 서버 · 화면 · AI 연동 · 클라우드 배포"],
 ];
 
@@ -1755,6 +1781,104 @@ const WHY: WhyCard[] = [
   },
 ];
 
+/** 기술 아이콘 경로. base 설정을 그대로 따릅니다. */
+const TECH_BASE = `${import.meta.env.BASE_URL}tech`;
+
+/**
+ * 다뤄본 기술 — 분야별로 묶습니다.
+ *
+ * 여기는 '무엇을 만져봤는가'(범위)만 보여줍니다.
+ * '얼마나 깊은가'(숙련도)는 바로 아래 STACK 세 단계에 적습니다.
+ * 두 곳을 나눈 이유는, 아이콘만 늘어놓으면 Java 와 Docker 가
+ * 같은 수준으로 보이기 때문입니다.
+ */
+interface TechIcon {
+  /** 아이콘 아래에 적는 이름 */
+  name: string;
+  /** public/tech/ 안의 파일명 */
+  file: string;
+}
+
+interface TechGroup {
+  /** 분야 이름 */
+  g: string;
+  items: TechIcon[];
+}
+
+const TECH: TechGroup[] = [
+  {
+    g: "언어",
+    items: [
+      { name: "Java", file: "java.png" },
+      { name: "Python", file: "python.png" },
+      { name: "JavaScript", file: "javascript.png" },
+      { name: "TypeScript", file: "typescript.png" },
+    ],
+  },
+  {
+    g: "데이터베이스",
+    items: [
+      { name: "MySQL", file: "mysql.png" },
+      { name: "PostgreSQL", file: "postgresql.svg" },
+      { name: "MongoDB", file: "mongodb.svg" },
+    ],
+  },
+  {
+    g: "프론트엔드",
+    items: [
+      { name: "React", file: "react.png" },
+      { name: "HTML5", file: "html.png" },
+      { name: "CSS3", file: "css.png" },
+    ],
+  },
+  {
+    g: "백엔드",
+    items: [
+      { name: "Spring Boot", file: "springboot.png" },
+      { name: "Spring Cloud", file: "spring-cloud.png" },
+      { name: "JSP", file: "jsp.png" },
+      { name: "Servlet", file: "servlet.png" },
+      { name: "Kafka", file: "kafka.svg" },
+    ],
+  },
+  {
+    g: "AI 연동",
+    items: [
+      { name: "LLM", file: "llm.png" },
+      { name: "RAG", file: "rag.png" },
+    ],
+  },
+  {
+    g: "인프라 · 배포",
+    items: [
+      { name: "Linux", file: "linux.png" },
+      { name: "AWS", file: "aws.png" },
+      { name: "Azure", file: "azure.svg" },
+      { name: "Docker", file: "docker.png" },
+      { name: "Kubernetes", file: "kubernetes.png" },
+      { name: "Terraform", file: "terraform.svg" },
+      { name: "Jenkins", file: "jenkins.svg" },
+      { name: "MSA", file: "msa.png" },
+    ],
+  },
+  {
+    g: "IDE · 개발 도구",
+    items: [
+      { name: "IntelliJ IDEA", file: "intellij.svg" },
+      { name: "Eclipse", file: "eclipse.svg" },
+      { name: "VS Code", file: "vscode.svg" },
+      { name: "PyCharm", file: "pycharm.svg" },
+      { name: "Antigravity", file: "antigravity.svg" },
+      { name: "DBeaver", file: "dbeaver.svg" },
+    ],
+  },
+  {
+    g: "협업",
+    items: [{ name: "Git", file: "git.png" }],
+  },
+];
+
+
 interface StackGroup {
   h: string;
   lv: string;
@@ -1767,7 +1891,7 @@ const STACK: StackGroup[] = [
     h: "직접 만들어 본 것",
     lv: "HANDS-ON",
     items: [
-      ["Java 17 / 21", "주 언어"],
+      ["Java 11 / 17 / 21", "주 언어"],
       ["Spring Boot", "1·2·3차 전부"],
       ["Thymeleaf", "1차 · 서버 렌더링"],
       ["MyBatis", "Mapper XML"],
@@ -1799,7 +1923,7 @@ const STACK: StackGroup[] = [
     items: [
       ["AWS", "SeSAC 과정 · 진행 중"],
       ["MSA 설계", "SeSAC 과정 · 진행 중"],
-      ["Docker · CI/CD", "배포 자동화 실습"],
+      ["Docker · Jenkins · CI/CD", "배포 자동화 실습"],
       ["QueryDSL", "3차 동적 쿼리"],
       ["JUnit · Mockito", "3차 테스트 코드"],
       ["TanStack Query", "서버 상태 관리"],
@@ -1848,10 +1972,14 @@ interface TimelineItem {
   what: string;
   detail: string;
   on?: boolean;
-  /** 교육기관 로고 (public/logos/) */
+  /** 소속 기관 로고 (public/logos/) */
   logo?: string;
   /** 로고 대체 텍스트 */
   logoAlt?: string;
+  /** 파견처 로고 — 소속과 파견처가 다를 때만 씁니다 */
+  subLogo?: string;
+  /** 파견처 로고 대체 텍스트 */
+  subLogoAlt?: string;
   /** 배운 내용 (교육과정에만 있습니다) */
   curriculum?: Curriculum[];
   /** 이 과정 안에서 진행한 프로젝트 */
@@ -1863,11 +1991,21 @@ const LOGO_BASE = `${import.meta.env.BASE_URL}logos`;
 
 const TIMELINE: TimelineItem[] = [
   {
+    when: "2026.10.16 – 재직 중",
+    what: "CREDIF 개발팀 · Java 백엔드 개발자 / 운영 시스템 엔지니어 (KTDS 포인트허브 운영 · 개발 파견)",
+    detail:
+      "2026년 10월 16일 입사해 개발팀에서 재직 중입니다. KTDS 포인트허브 운영·개발 프로젝트에 파견되어 Java 기반 백엔드 개발을 맡고 있습니다. 운영 시스템 엔지니어링과 관제도 함께 하고 있습니다.",
+    on: true,
+    logo: `${LOGO_BASE}/credif.png`,
+    logoAlt: "CREDIF 로고",
+    subLogo: `${LOGO_BASE}/ktds.png`,
+    subLogoAlt: "KT DS 로고",
+  },
+  {
     when: "2026.05.18 – 11.20",
     what: "SeSAC · AWS와 AI를 활용한 MSA 기반 웹 서비스 개발",
     detail:
-      "서울시가 운영하는 청년 개발자 교육기관(Seoul Software Academy)의 6개월 과정입니다. 앞선 국비 과정을 수료하고 닷새 뒤에 바로 이어서 시작했고, 2026년 11월 20일에 수료합니다. 풀스택 기초를 한 번 훑은 뒤라, 이번에는 서비스를 어떻게 나누고 어떻게 배포하는지에 집중하고 있습니다.",
-    on: true,
+      "서울시가 운영하는 청년 개발자 교육기관(Seoul Software Academy)의 6개월 과정입니다. 앞선 국비 과정을 수료한 닷새 뒤에 바로 이어서 시작했습니다. 10월 16일 취업이 확정되어 조기 수료했습니다. 수료일은 2026년 11월 20일입니다. 풀스택 기초를 한 번 훑은 뒤라 이 과정에서는 서비스를 어떻게 나누고 배포하는지에 집중했습니다.",
     logo: `${LOGO_BASE}/sesac.png`,
     logoAlt: "SeSAC (Seoul Software Academy) 로고",
     curriculum: [
@@ -2619,6 +2757,44 @@ const StackPage: React.FC<{ go: (p: Page) => void }> = ({ go }) => (
       lead="서버 · 화면 · AI 연동 · 배포 네 갈래를 모두 만져봤습니다. 다만 신입에게 중요한 건 목록의 길이가 아니라 어디까지 해봤는지라고 생각해, 숙련도를 세 단계로 나누고 어느 프로젝트에서 썼는지까지 표로 적었습니다."
     />
 
+    <section style={{ paddingBottom: 0 }}>
+      <div className="wrap">
+        <Rv className="sec-head">
+          <p className="eyebrow">기술 목록</p>
+          <h2 className="sec">이 도구들을 씁니다</h2>
+          <p className="sec-lead">
+            <b>써본 범위</b>를 먼저 보여드립니다. 얼마나 깊은지는 바로 아래{" "}
+            <b>세 단계</b>로 나눠 적었습니다.
+          </p>
+        </Rv>
+        <Rv className="techs">
+          {TECH.map((grp) => (
+            <div className="tech-g" key={grp.g}>
+              <div className="tg">
+                <b>{grp.g}</b>
+                <i />
+                <em>{grp.items.length}</em>
+              </div>
+              <div className="ti">
+                {grp.items.map((t) => (
+                  <div className="tech" key={t.file}>
+                    <img
+                      src={`${TECH_BASE}/${t.file}`}
+                      alt={`${t.name} 로고`}
+                      width="38"
+                      height="38"
+                      loading="lazy"
+                    />
+                    <b>{t.name}</b>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </Rv>
+      </div>
+    </section>
+
     <section>
       <div className="wrap">
         <Rv className="sec-head">
@@ -2769,6 +2945,11 @@ const HistoryPage: React.FC<{ go: (p: Page) => void }> = ({ go }) => (
                     <img src={t.logo} alt={t.logoAlt ?? ""} width="46" height="46" loading="lazy" />
                   </span>
                 )}
+                {t.subLogo && (
+                  <span className="logo">
+                    <img src={t.subLogo} alt={t.subLogoAlt ?? ""} width="46" height="46" loading="lazy" />
+                  </span>
+                )}
                 <div>
                   <div className="when">{t.when}</div>
                   <div className="what">{t.what}</div>
@@ -2817,10 +2998,10 @@ const HistoryPage: React.FC<{ go: (p: Page) => void }> = ({ go }) => (
    CONTACT — 연락
    ══════════════════════════════════════════════════════════════════════ */
 const HIRE: [string, string][] = [
-  ["근무 가능 시기", "2026년 11월 20일 SeSAC 수료 후 · 시기 협의 가능"],
+  ["현재 상태", "CREDIF 개발팀 재직 중 · 좋은 기회라면 이야기 나누고 싶습니다 · 시기 협의 가능"],
   ["희망 직무", "풀스택 개발자 — 서버 · 화면 · AI 연동 · 클라우드 배포"],
   ["근무 지역", "서울 · 수도권"],
-  ["고용 지원", "청년취업지원 프로그램 이수 · 고용지원금 지원 대상"],
+  ["이수 프로그램", "청년취업지원 프로그램"],
 ];
 
 const ContactPage: React.FC<{ go: (p: Page) => void }> = ({ go }) => (
